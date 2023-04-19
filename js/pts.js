@@ -20,8 +20,9 @@ var style_zones = {
 };
 
 var style_pts= {
+    "color": "#ffffff",
     "radius": 5,
-    "weight": 0,
+    "weight": 1,
     "opacity": 1,
     "fillColor": "#cc66ff",
     "fillOpacity": 1
@@ -34,8 +35,9 @@ function functional_toilets(b) {
 }
 function funcToiletsStyle(feature,map) {
     return { 
-        opacity:0.5,
-        weight:0,
+        color:'#ffffff',
+        opacity:1,
+        weight:1.5,
         fillColor: functional_toilets(feature.properties.Toilet_functional),
         fillOpacity:1
     };
@@ -51,8 +53,9 @@ function facility_management(b) {
 }
 function facilityMgtStyle(feature,map) {
     return { 
-        opacity:0.5,
-        weight:0,
+        color:'#ffffff',
+        opacity:1,
+        weight:1.5,
         fillColor: facility_management(feature.properties.Facility_management),
         fillOpacity:1
     };
@@ -69,8 +72,9 @@ function toilet_distribution(b) {
 }
 function toiletDistStyle(feature,map) {
     return { 
-        opacity:0.5,
-        weight:0,
+        color:'#ffffff',
+        opacity:1,
+        weight:1.5,
         fillColor: toilet_distribution(feature.properties.Zone),
         fillOpacity:1
     };
@@ -87,8 +91,9 @@ function water_source(b) {
 }
 function waterSourceStyle(feature,map) {
     return { 
-        opacity:0.5,
-        weight:0,
+        color:'#ffffff',
+        opacity:1,
+        weight:1.5,
         fillColor: water_source(feature.properties.water_source),
         fillOpacity:1
     };
@@ -104,8 +109,9 @@ function cleaning_frequency(b) {
 }
 function cleaningFreqStyle(feature,map) {
     return { 
-        opacity:0.5,
-        weight:0,
+        color:'#ffffff',
+        opacity:1,
+        weight:1.5,
         fillColor: cleaning_frequency(feature.properties.toilet_clean_frequency),
         fillOpacity:1
     };
@@ -122,8 +128,9 @@ function esp(b) {
 }
 function espStyle(feature,map) {
     return { 
-        opacity:0.5,
-        weight:0,
+        color:'#ffffff',
+        opacity:1,
+        weight:1.5,
         fillColor: esp(feature.properties.emptying_service_provider),
         fillOpacity:1
     };
@@ -137,8 +144,9 @@ function ces(b) {
 }
 function cesStyle(feature,map) {
     return { 
-        opacity:0.5,
-        weight:0,
+        color:'#ffffff',
+        opacity:1,
+        weight:1.5,
         fillColor: ces(feature.properties.containment_emptied),
         fillOpacity:1
     };
@@ -156,8 +164,9 @@ function tt(c) {
 }
 function ttStyle(feature,map) {
     return { 
-        opacity:0.5,
-        weight:0,
+        color:'#ffffff',
+        opacity:1,
+        weight:1.5,
         fillColor: tt(feature.properties.Type_of_toilet_facility),
         fillOpacity:1
     };
@@ -171,8 +180,9 @@ function s_availability(b) {
 }
 function s_availabilityStyle(feature,map) {
     return { 
-        opacity:0.5,
-        weight:0.5,
+        color:'#ffffff',
+        opacity:1,
+        weight:1.5,
         fillColor: s_availability(feature.properties.Shower_facility_available),
         fillOpacity:1
     };
@@ -186,8 +196,9 @@ function u_availability(b) {
 }
 function u_availabilityStyle(feature,map) {
     return { 
-        opacity:0.5,
-        weight:0.5,
+        color:'#ffffff',
+        opacity:1,
+        weight:1.5,
         fillColor: u_availability(feature.properties.Urianal_available),
         fillOpacity:1
     };
@@ -201,8 +212,9 @@ function g_access(b) {
 }
 function g_accessStyle(feature,map) {
     return { 
-        opacity:0.5,
-        weight:0.5,
+        color:'#ffffff',
+        opacity:1,
+        weight:1.5,
         fillColor: g_access(feature.properties.toilet_gender),
         fillOpacity:1
     };
@@ -216,8 +228,9 @@ function p_access(b) {
 }
 function p_accessStyle(feature,map) {
     return { 
-        opacity:0.5,
-        weight:0.5,
+        color:'#ffffff',
+        opacity:1,
+        weight:1.5,
         fillColor: p_access(feature.properties.accessible_to_people_with_limited_mobility),
         fillOpacity:1
     };
@@ -231,8 +244,9 @@ function s_access(b) {
 }
 function s_accessStyle(feature,map) {
     return { 
-        opacity:0.5,
-        weight:0.5,
+        color:'#ffffff',
+        opacity:1,
+        weight:1.5,
         fillColor: s_access(feature.properties.shower_gender),
         fillOpacity:1
     };
@@ -246,8 +260,9 @@ function water_tank(b) {
 }
 function water_tankStyle(feature,map) {
     return { 
-        opacity:0.5,
-        weight:0.5,
+        color:'#ffffff',
+        opacity:1,
+        weight:1.5,
         fillColor: water_tank(feature.properties.waterStorageTank),
         fillOpacity:1
     };
@@ -256,8 +271,9 @@ function water_tankStyle(feature,map) {
 //baby changing
 function baby_changingStyle(feature,map) {
     return { 
-        opacity:0.5,
-        weight:0.5,
+        color:'#ffffff',
+        opacity:1,
+        weight:1.5,
         fillColor: water_tank(feature.properties.baby_changing_facility),
         fillOpacity:1
     };
@@ -266,8 +282,9 @@ function baby_changingStyle(feature,map) {
 //MenstrualDisposalBin
 function mdbStyle(feature,map) {
     return { 
-        opacity:0.5,
-        weight:0.5,
+        color:'#ffffff',
+        opacity:1,
+        weight:1.5,
         fillColor: water_tank(feature.properties.MenstrualDisposalBin),
         fillOpacity:1
     };
@@ -276,8 +293,9 @@ function mdbStyle(feature,map) {
 //dustbin
 function dbStyle(feature,map) {
     return { 
-        opacity:0.5,
-        weight:0.5,
+        color:'#ffffff',
+        opacity:1,
+        weight:1.5,
         fillColor: water_tank(feature.properties.Dustbin),
         fillOpacity:1
     };
