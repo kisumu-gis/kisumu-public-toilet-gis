@@ -2,7 +2,6 @@ var map = L.map('map').setView([-0.0841,34.7737], 12 );
 var baselayer = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
 
-
 //LAYER STYLES
 var style_boundary = {
     "color": "#0d0d0d",
@@ -285,8 +284,6 @@ function dbStyle(feature,map) {
 }
 
 
-
-
 //LAYER INTERACTIONS
 function highlightFeature(e) {
     var layer = e.target;
@@ -301,40 +298,14 @@ function highlightFeature(e) {
     if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
         layer.bringToFront();
     }
-    //info.update(layer.feature.properties);
 }
 function resetHighlight(e) {
     service_zones.resetStyle(e.target);
     //info.update();
 }
 
-function zoomToFeature(e,nameIG) {
-    //var nameIG = e.target.feature.properties.SHEET_NO; 
+function zoomToFeature(e,nameIG) { 
     map.fitBounds(e.target.getBounds());
-    // info1.update(e.target.feature.properties);
-    // console.log(nameIG);
-
-    // var img = new Image();
-    // img.src = "http://simoa.me.ke/img/topo/" + nameIG+ ".jpg";
-
-    // var $image = $("img").first();
-    // var $downloadingImage = $("<img>");
-    // $downloadingImage.load(function(){
-    //   $image.attr("src", $(this).attr("src"));  
-    // });
-    // $downloadingImage.attr("src", img.src);
-
-    // img.onerror = function() {
-    //     img.alt = "404";
-    //     console.log('fail');
-    // };
-    // img.onload = function() {
-    //     if (img.alt === "404") {
-    //         return;
-    //     }
-    //     console.log('yes');
-    // };
-
 }
 
 function onEachServiceZoneFeature(feature, layer) {
@@ -455,28 +426,6 @@ infoW.update = function (props) {
             '</div>'+
         '</div>'+
     '</div>'+
-    // '<div>'+
-    //     '<input type="radio" name="level0" value="religious" id="C"/>'+
-    //     '<label class="container0" for="C">Religious</label>'+
-    //     '<div class="sub1">'+
-    //         '<div>'+
-    //             '<input type="radio" name="level1" value="toilets" id="A0"/>'+
-    //             '<label for="A0">Toilet Available?</label>'+
-    //         '</div>'+
-    //         '<div>'+
-    //             '<input type="radio" name="level1" value="shared" id="A1"/>'+
-    //             '<label for="A1">Shared?</label>'+
-    //         '</div>'+
-    //         '<div>'+
-    //             '<input type="radio" name="level1" value="connected" id="A1"/>'+
-    //             '<label for="A1">Sewer Connecter</label>'+
-    //         '</div>'+
-    //         '<div>'+
-    //             '<input type="radio" name="level1" value="pit" id="A1"/>'+
-    //             '<label for="A1">Pit Latrines</label>'+
-    //         '</div>'+
-    //     '</div>'+
-    // '</div>'+
     '</div>'+'</div>';    
 };
 
