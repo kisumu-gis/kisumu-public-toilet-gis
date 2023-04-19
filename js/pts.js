@@ -1,12 +1,4 @@
 var map = L.map('map').setView([-0.0841,34.7737], 12 );
-
-//map.addControl(L.control.zoom({position:'topright'}));
-//map.setMaxBounds(map.getBounds());
-
-
-// var map = L.map('map' ,{center :[-0.0841,34.7737] , zoom : 13 });
-// map.addControl(L.control.zoom({position:'topright'}));
-
 var baselayer = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
 
@@ -720,15 +712,12 @@ filtered = L.featureGroup().addLayer(pts_points).addTo(map);
 //FILTER MECHANISM
 $( "input:radio[name='level0']" ).on('click',function( event) {
     if($('input[name="level0"]:checked').prop("checked") == true){
-        //filtered.clearLayers();
         var layerClicked = window[event.target.value];
         var test = $( 'input[name="level0"]:checked' ).val();
-        console.log(test); 
 //level1
         $( "input:radio[name='level1']" ).on('click',function( event) {
             if($('input[name="level1"]:checked').prop("checked") == true){
                 var test1 = $( "input[name='level1']:checked" ).val();
-                console.log(test1);
                 if (test1=='functional_status') {
                     filtered.setStyle(funcToiletsStyle);
                     map.removeControl(currentLegend );
@@ -815,8 +804,6 @@ $( "input:radio[name='level0']" ).on('click',function( event) {
 
     }
     else if($('input[name="level0"]:checked').prop("checked") == false){
-        //filtered.clearLayers();
-        console.log("Checkbox is unchecked.");
     }
 
 });
