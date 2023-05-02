@@ -21,7 +21,7 @@ var style_boundary = {
     "weight": 1.5,
     "opacity": 1,
     "fillColor": "#ADADAD",
-    "fillOpacity": 0.3
+    "fillOpacity": 0
 };
 
 var style_zones = {
@@ -368,7 +368,7 @@ function zoomToFeature(e,nameIG) {
 }
 
 function onEachServiceZoneFeature(feature, layer) {
-    layer.bindPopup(feature.properties.Zone);
+    layer.bindPopup(feature.properties.Zone,{maxWidth: "auto"});
     layer.on({
         mouseover: highlightFeature,
         mouseout: resetHighlight,
@@ -377,7 +377,7 @@ function onEachServiceZoneFeature(feature, layer) {
 }
 
 function onEachPOIFeature(feature, layer) {
-    layer.bindPopup(feature.properties.NAME);   
+    layer.bindPopup(feature.properties.NAME,{maxWidth: "auto"});   
 }
 
 
@@ -534,7 +534,7 @@ var pts_points = L.geoJSON(data, {
             '<p><b>Total Toilet Compartments</b>: '+feature.properties.Total_Toilet_compartements+'</p>'+
             '<p><b>Urinals Availability</b>: '+feature.properties.Urianal_available+'</p>'+
             '<p><b>Showers Availability</b>: '+feature.properties.Shower_facility_available+'</p>'+
-            '<img id ="pics" src="./img/images/'+feature.properties.photo_toilet_facility+'"/>');
+            '<img id ="pics" src="./img/images/'+feature.properties.photo_toilet_facility+'"/>',{maxWidth: "auto"});
     }
 });
 
