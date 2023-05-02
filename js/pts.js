@@ -1,5 +1,18 @@
-var map = L.map('map').setView([-0.0841,34.7737], 12 );
-var baselayer = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+// var map = L.map('map').setView([-0.0841,34.7737], 12 );
+
+// map.addControl(L.control.zoom({position:'topright'}));
+// //map.setMaxBounds(map.getBounds());
+
+
+var map = L.map('map' ,{center :[-0.0841,34.7737] , zoom : 12 ,zoomControl: false});
+map.addControl(L.control.zoom({position:'topright'}));
+
+var osm_baselayer = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+//var sat_baselayer = L.tileLayer('https://www.bing.com/maps');
+var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+});
+
 
 
 //LAYER STYLES
@@ -302,6 +315,8 @@ function dbStyle(feature,map) {
 }
 
 
+
+
 //LAYER INTERACTIONS
 function highlightFeature(e) {
     var layer = e.target;
@@ -316,14 +331,40 @@ function highlightFeature(e) {
     if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
         layer.bringToFront();
     }
+    //info.update(layer.feature.properties);
 }
 function resetHighlight(e) {
     service_zones.resetStyle(e.target);
     //info.update();
 }
 
-function zoomToFeature(e,nameIG) { 
+function zoomToFeature(e,nameIG) {
+    //var nameIG = e.target.feature.properties.SHEET_NO; 
     map.fitBounds(e.target.getBounds());
+    // info1.update(e.target.feature.properties);
+    // console.log(nameIG);
+
+    // var img = new Image();
+    // img.src = "http://simoa.me.ke/img/topo/" + nameIG+ ".jpg";
+
+    // var $image = $("img").first();
+    // var $downloadingImage = $("<img>");
+    // $downloadingImage.load(function(){
+    //   $image.attr("src", $(this).attr("src"));  
+    // });
+    // $downloadingImage.attr("src", img.src);
+
+    // img.onerror = function() {
+    //     img.alt = "404";
+    //     console.log('fail');
+    // };
+    // img.onload = function() {
+    //     if (img.alt === "404") {
+    //         return;
+    //     }
+    //     console.log('yes');
+    // };
+
 }
 
 function onEachServiceZoneFeature(feature, layer) {
@@ -341,7 +382,7 @@ function onEachPOIFeature(feature, layer) {
 
 
 //FILTER WINDOWS
-var infoW = L.control({position: 'topleft'});
+var infoW = L.control({position: 'bottomleft'});
 
 infoW.onAdd = function (map) {
     this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
@@ -444,6 +485,28 @@ infoW.update = function (props) {
             '</div>'+
         '</div>'+
     '</div>'+
+    // '<div>'+
+    //     '<input type="radio" name="level0" value="religious" id="C"/>'+
+    //     '<label class="container0" for="C">Religious</label>'+
+    //     '<div class="sub1">'+
+    //         '<div>'+
+    //             '<input type="radio" name="level1" value="toilets" id="A0"/>'+
+    //             '<label for="A0">Toilet Available?</label>'+
+    //         '</div>'+
+    //         '<div>'+
+    //             '<input type="radio" name="level1" value="shared" id="A1"/>'+
+    //             '<label for="A1">Shared?</label>'+
+    //         '</div>'+
+    //         '<div>'+
+    //             '<input type="radio" name="level1" value="connected" id="A1"/>'+
+    //             '<label for="A1">Sewer Connecter</label>'+
+    //         '</div>'+
+    //         '<div>'+
+    //             '<input type="radio" name="level1" value="pit" id="A1"/>'+
+    //             '<label for="A1">Pit Latrines</label>'+
+    //         '</div>'+
+    //     '</div>'+
+    // '</div>'+
     '</div>'+'</div>';    
 };
 
@@ -465,7 +528,13 @@ var pois = L.geoJson(poi,{onEachFeature:onEachPOIFeature});
 
 var pts_points = L.geoJSON(data, {
     pointToLayer: function (feature, latlng) {
-        return L.circleMarker(latlng, style_pts).bindPopup('<img id ="pics" src="./img/images/'+feature.properties.photo_toilet_facility+'"/>');
+        return L.circleMarker(latlng, style_pts).bindPopup('<p><b>Toilet Functional Status</b>: '+feature.properties.Toilet_functional+'</p>'+
+            '<p><b>Facility Management</b>: '+feature.properties.Facility_management+'</p>'+
+            '<p><b>Type of Toilet Facility</b>: '+feature.properties.Type_of_toilet_facility+'</p>'+
+            '<p><b>Total Toilet Compartments</b>: '+feature.properties.Total_Toilet_compartements+'</p>'+
+            '<p><b>Urinals Availability</b>: '+feature.properties.Urianal_available+'</p>'+
+            '<p><b>Showers Availability</b>: '+feature.properties.Shower_facility_available+'</p>'+
+            '<img id ="pics" src="./img/images/'+feature.properties.photo_toilet_facility+'"/>');
     }
 });
 
@@ -661,7 +730,8 @@ currentLegend = legend_pipes;
 
 //layer control
 var baseMaps = {
-    "OpenStreetMap": baselayer,
+    "OpenStreetMap": osm_baselayer,
+    "Satellite": Esri_WorldImagery
 };
 
 var overlayMaps = {
@@ -669,7 +739,7 @@ var overlayMaps = {
     "Zones": service_zones,
     "Kiwasco service area boundary ": service_boundary,
 };
-var layerControl = L.control.layers(baseMaps, overlayMaps,{collapsed:false, position: 'topleft'}).addTo(map);
+var layerControl = L.control.layers(baseMaps, overlayMaps,{collapsed:false, position: 'topright'}).addTo(map);
 
 
 
@@ -679,12 +749,15 @@ filtered = L.featureGroup().addLayer(pts_points).addTo(map);
 //FILTER MECHANISM
 $( "input:radio[name='level0']" ).on('click',function( event) {
     if($('input[name="level0"]:checked').prop("checked") == true){
+        //filtered.clearLayers();
         var layerClicked = window[event.target.value];
         var test = $( 'input[name="level0"]:checked' ).val();
+        //console.log(test); 
 //level1
         $( "input:radio[name='level1']" ).on('click',function( event) {
             if($('input[name="level1"]:checked').prop("checked") == true){
                 var test1 = $( "input[name='level1']:checked" ).val();
+                //console.log(test1);
                 if (test1=='functional_status') {
                     filtered.setStyle(funcToiletsStyle);
                     map.removeControl(currentLegend );
@@ -771,6 +844,8 @@ $( "input:radio[name='level0']" ).on('click',function( event) {
 
     }
     else if($('input[name="level0"]:checked').prop("checked") == false){
+        //filtered.clearLayers();
+        //console.log("Checkbox is unchecked.");
     }
 
 });
