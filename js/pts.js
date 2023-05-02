@@ -1,14 +1,7 @@
-// var map = L.map('map').setView([-0.0841,34.7737], 12 );
-
-// map.addControl(L.control.zoom({position:'topright'}));
-// //map.setMaxBounds(map.getBounds());
-
-
 var map = L.map('map' ,{center :[-0.0841,34.7737] , zoom : 12 ,zoomControl: false});
 map.addControl(L.control.zoom({position:'topright'}));
 
 var osm_baselayer = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-//var sat_baselayer = L.tileLayer('https://www.bing.com/maps');
 var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
     attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
 });
@@ -339,32 +332,7 @@ function resetHighlight(e) {
 }
 
 function zoomToFeature(e,nameIG) {
-    //var nameIG = e.target.feature.properties.SHEET_NO; 
     map.fitBounds(e.target.getBounds());
-    // info1.update(e.target.feature.properties);
-    // console.log(nameIG);
-
-    // var img = new Image();
-    // img.src = "http://simoa.me.ke/img/topo/" + nameIG+ ".jpg";
-
-    // var $image = $("img").first();
-    // var $downloadingImage = $("<img>");
-    // $downloadingImage.load(function(){
-    //   $image.attr("src", $(this).attr("src"));  
-    // });
-    // $downloadingImage.attr("src", img.src);
-
-    // img.onerror = function() {
-    //     img.alt = "404";
-    //     console.log('fail');
-    // };
-    // img.onload = function() {
-    //     if (img.alt === "404") {
-    //         return;
-    //     }
-    //     console.log('yes');
-    // };
-
 }
 
 function onEachServiceZoneFeature(feature, layer) {
@@ -485,28 +453,6 @@ infoW.update = function (props) {
             '</div>'+
         '</div>'+
     '</div>'+
-    // '<div>'+
-    //     '<input type="radio" name="level0" value="religious" id="C"/>'+
-    //     '<label class="container0" for="C">Religious</label>'+
-    //     '<div class="sub1">'+
-    //         '<div>'+
-    //             '<input type="radio" name="level1" value="toilets" id="A0"/>'+
-    //             '<label for="A0">Toilet Available?</label>'+
-    //         '</div>'+
-    //         '<div>'+
-    //             '<input type="radio" name="level1" value="shared" id="A1"/>'+
-    //             '<label for="A1">Shared?</label>'+
-    //         '</div>'+
-    //         '<div>'+
-    //             '<input type="radio" name="level1" value="connected" id="A1"/>'+
-    //             '<label for="A1">Sewer Connecter</label>'+
-    //         '</div>'+
-    //         '<div>'+
-    //             '<input type="radio" name="level1" value="pit" id="A1"/>'+
-    //             '<label for="A1">Pit Latrines</label>'+
-    //         '</div>'+
-    //     '</div>'+
-    // '</div>'+
     '</div>'+'</div>';    
 };
 
@@ -749,10 +695,8 @@ filtered = L.featureGroup().addLayer(pts_points).addTo(map);
 //FILTER MECHANISM
 $( "input:radio[name='level0']" ).on('click',function( event) {
     if($('input[name="level0"]:checked').prop("checked") == true){
-        //filtered.clearLayers();
         var layerClicked = window[event.target.value];
         var test = $( 'input[name="level0"]:checked' ).val();
-        //console.log(test); 
 //level1
         $( "input:radio[name='level1']" ).on('click',function( event) {
             if($('input[name="level1"]:checked').prop("checked") == true){
@@ -844,8 +788,6 @@ $( "input:radio[name='level0']" ).on('click',function( event) {
 
     }
     else if($('input[name="level0"]:checked').prop("checked") == false){
-        //filtered.clearLayers();
-        //console.log("Checkbox is unchecked.");
     }
 
 });
